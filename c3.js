@@ -5355,6 +5355,8 @@ c3_chart_internal_fn.convertJsonToData = function (json, keys) {
     return data;
 };
 c3_chart_internal_fn.findValueInJson = function (object, path) {
+    // HACK: allow special characters in path
+    if (object[path]) return object[path];
     path = path.replace(/\[(\w+)\]/g, '.$1'); // convert indexes to properties (replace [] with .)
     path = path.replace(/^\./, ''); // strip a leading dot
     var pathArray = path.split('.');
